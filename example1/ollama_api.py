@@ -19,7 +19,7 @@ def generate_restaurant_name(cuisine:str):
 
     prompt_template_items2 = PromptTemplate(
         input_variables= ['restaurant_name'],
-        template = "Suggest some menu items for {restaurant_name}. Return it as a comma separated list"
+        template = "Suggest some menu items for {restaurant_name}. Return it as a comma separated list without any metadata"
     )
 
     food_items_chain2 = LLMChain(llm=model, prompt=prompt_template_items2, output_key="menu_items")
@@ -38,4 +38,7 @@ def generate_restaurant_name(cuisine:str):
 
 
 if __name__ == "__main__":
-    print("Result: "+ str(generate_restaurant_name("Tibetian")))
+    output = generate_restaurant_name("Tibetian")
+    print("Cuisine: "+ output['cuisine'])
+    print("Name: " + output['restaurant_name'])
+    print("Menu: " + output['menu_items'])
